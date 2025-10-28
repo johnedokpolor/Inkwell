@@ -1,5 +1,4 @@
 "use client";
-import { assets } from "@/Assets/assets";
 import Sidebar from "@/Componets/AdminComponents/Sidebar";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
