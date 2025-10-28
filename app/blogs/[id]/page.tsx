@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Comments from "@/Componets/Comments";
+import Link from "next/link";
 
 interface PropTypes {
   params: Promise<{ id: string }>;
@@ -59,18 +60,19 @@ const Page = ({ params }: PropTypes) => {
             <h1 className="text-xl font-semibold md:text-4xl">Inkwell.</h1>
           </motion.div>
         </div>
-
-        <motion.button
-          whileHover={{
-            scale: 1.05,
-            x: 50,
-            rotate: "5deg",
-            transition: { duration: 0.1, type: "spring", delay: 0 },
-          }}
-          className="flex cursor-pointer text-sm md:text-base items-center gap-2 font-meduim py-1 px-3 sm:py-2 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]"
-        >
-          Get Started <Image src={assets.arrow} alt="" />
-        </motion.button>
+        <Link href={"/admin/addBlog"}>
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              x: 50,
+              rotate: "5deg",
+              transition: { duration: 0.1, type: "spring", delay: 0 },
+            }}
+            className="flex cursor-pointer text-sm md:text-base items-center gap-2 font-meduim py-1 px-3 sm:py-2 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]"
+          >
+            Get Started <Image src={assets.arrow} alt="" />
+          </motion.button>
+        </Link>
       </div>
       {data ? (
         <>
@@ -96,10 +98,11 @@ const Page = ({ params }: PropTypes) => {
             <Image
               width={600}
               height={300}
-              className="border-4 w-full  border-white"
+              className="border-4 object-cover max-h-[300px] w-full border-white"
               src={data.image}
               alt=""
             />
+
             <p className="text-base my-5 ">{data.description}</p>
 
             <div className="mt-16 font-semibold">

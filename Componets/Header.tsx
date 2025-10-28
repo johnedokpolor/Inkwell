@@ -5,6 +5,7 @@ import { assets } from "@/Assets/assets";
 import { motion } from "motion/react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const Header = () => {
   const [email, setEmail] = useState("");
@@ -48,18 +49,19 @@ const Header = () => {
             <h1 className="md:text-4xl text-xl font-semibold">Inkwell.</h1>
           </motion.div>
         </div>
-
-        <motion.button
-          whileHover={{
-            scale: 1.05,
-            x: 50,
-            rotate: "5deg",
-            transition: { duration: 0.1, type: "spring", delay: 0 },
-          }}
-          className="flex cursor-pointer text-sm md:text-base items-center gap-2 font-meduim py-1 px-3 sm:py-2 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]"
-        >
-          Get Started <Image src={assets.arrow} alt="" />
-        </motion.button>
+        <Link href="/admin/addBlog">
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              x: 50,
+              rotate: "5deg",
+              transition: { duration: 0.1, type: "spring", delay: 0 },
+            }}
+            className="flex cursor-pointer text-sm md:text-base items-center gap-2 font-meduim py-1 px-3 sm:py-2 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000000]"
+          >
+            Get Started <Image src={assets.arrow} alt="" />
+          </motion.button>
+        </Link>
       </div>
       <div className="my-8 text-center">
         <motion.h1
