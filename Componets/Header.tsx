@@ -1,9 +1,26 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { assets } from "@/Assets/assets";
 import { motion } from "motion/react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Header = () => {
+  const [email, setEmail] = useState("");
+
+  async function handleSubmit(e: SyntheticEvent) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("email", email);
+    const response = await axios.post("/api/subscriber", formData);
+    console.log(response.data);
+    if (response.data.success) {
+      toast.success("Subscription successfull");
+    } else {
+      toast.error("Subscription Failed, Try again.");
+    }
+  }
   return (
     <div className="px-5 py-5 md:px-12 lg:px-28">
       <div className="flex items-center justify-between">
@@ -72,11 +89,13 @@ const Header = () => {
           className="cursor-pointer shadow-[-7px_7px_0px_#000000] flex justify-between max-w-xl mx-auto mt-10 scale-75 border border-black sm:scale-75"
         >
           <input
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
-            className="outline-none indent-4"
+            className="outline-none w-full indent-4"
             placeholder="Enter your email"
           />
           <button
+            onClick={handleSubmit}
             type="submit"
             className="px-4 py-4 border-l border-black sm:px-8 active:bg-gray-600 active:text-white"
           >
