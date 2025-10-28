@@ -34,7 +34,7 @@ const Page = ({ params }: PropTypes) => {
   }, []);
   return (
     <div className="py-5  h-[450px]  bg-gray-200">
-      <div className="flex items-center justify-between lg:px-28 md:px-12">
+      <div className="flex items-center justify-between lg:px-28 px-5 md:px-12">
         <div className="flex items-center gap-1">
           <motion.div
             initial={{
