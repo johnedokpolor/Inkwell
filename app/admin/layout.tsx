@@ -12,31 +12,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <ToastContainer theme="dark" />
       <div className="flex bg-white fixed top-0 flex-col gap-2 w-full">
         <div className="flex justify-between px-5 sm:px-12 h-[60px] border border-black items-center">
-          {/* {sideMenu ? (
-            <div
-              onClick={() => setSideMenu((prev) => !prev)}
-              className="lg:hidden space-y-1"
-            >
-              <div className="h-1 w-8 rounded-sm bg-black rotate-45"></div>
-              <div className="h-1 w-8 rounded-sm bg-black"></div>
-            </div>
-          ) : (
-            <div
-              onClick={() => setSideMenu((prev) => !prev)}
-              className="lg:hidden space-y-1"
-            >
-              <div className="h-1 w-8 rounded-sm bg-black"></div>
-              <div className="h-1 w-8 rounded-sm bg-black"></div>
-              <div className="h-1 w-8 rounded-sm bg-black"></div>
-            </div>
-          )} */}
           <div
             onClick={() => setSideMenu((prev) => !prev)}
             className="lg:hidden space-y-1"
           >
             <div
               className={`h-1 w-8 rounded-sm ${
-                sideMenu && "rotate-45 top-1"
+                sideMenu && "rotate-45 "
               } bg-black duration-500 transition-all relative `}
             ></div>
             <div
@@ -44,13 +26,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             ></div>
             <div
               className={`h-1 w-8 rounded-sm ${
-                sideMenu && "-rotate-45 -top-1 "
+                sideMenu && "-rotate-45 "
               } bg-black duration-500 transition-all relative `}
             ></div>
           </div>
 
           <p className="font-medium">Admin Panel</p>
-          <Image src={`/author_img.png`} height={40} width={40} alt="profile-icon" />
+          <Image
+            src={`/author_img.png`}
+            height={40}
+            width={40}
+            alt="profile-icon"
+          />
         </div>
       </div>
       <div className=" mt-15">
