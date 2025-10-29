@@ -1,8 +1,6 @@
 import { ConnectDB } from "@/lib/config/db";
 import { NextResponse } from "next/server";
 import { Blog } from "@/lib/config/models/blogModel";
-import { writeFile } from "fs/promises";
-import fs from "fs";
 import "dotenv/config";
 import { Comment } from "@/lib/config/models/commentModel";
 import { v2 as cloudinary } from "cloudinary";
@@ -30,7 +28,6 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const timestamp = Date.now();
   const formData = await request.formData();
 
   const title = formData.get("title");
@@ -82,8 +79,7 @@ export async function DELETE(request) {
   const id = request.nextUrl.searchParams.get("id");
   const blog = await Blog.findById(id);
   await Comment.deleteMany({ assignedTo: id });
-  fs.unlink(`./public/${blog.image}`, (err) => {});
-  // await cloudinary.uploader.destroy(blog.imageId);
+  await cloudinary.uploader.destroy(blog.imageId);
   await Blog.findByIdAndDelete(id);
   return NextResponse.json({ success: true, msg: "Blog Deleted Successfully" });
 }
