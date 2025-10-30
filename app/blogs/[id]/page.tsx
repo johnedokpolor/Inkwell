@@ -24,6 +24,27 @@ const Page = ({ params }: PropTypes) => {
     author: string;
     authorImg: string;
   } | null>(null);
+  const formattedDescription = data?.description?.replace(/\n/g, "<br/>") ?? "";
+  let responseArray = formattedDescription.split("**");
+  let newResponse = "";
+
+  for (let i = 0; i < responseArray.length; i++) {
+    if (i % 2 === 0) {
+      newResponse += responseArray[i];
+    } else {
+      newResponse += `<b>${responseArray[i]}</b>`;
+    }
+  }
+  let responseArray2 = newResponse.split("*");
+  let newResponse2 = "";
+
+  for (let i = 0; i < responseArray2.length; i++) {
+    if (i % 2 === 0) {
+      newResponse2 += responseArray2[i];
+    } else {
+      newResponse2 += `<b>${responseArray2[i]}</b>`;
+    }
+  }
 
   const fetchData = async () => {
     const { id } = await params;
@@ -98,12 +119,15 @@ const Page = ({ params }: PropTypes) => {
             <Image
               width={600}
               height={300}
-              className="border-4 object-cover max-h-[300px] w-full border-white"
+              className="border-4 object-cover max-h-[300px] sm:max-h-[500px] w-full border-white"
               src={data.image}
               alt=""
             />
 
-            <p className="text-base my-5 ">{data.description}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: newResponse2 }}
+              className="text-base my-5 "
+            ></p>
 
             <div className="mt-16 font-semibold">
               Share this article on social media

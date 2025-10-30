@@ -37,6 +37,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             height={40}
             width={40}
             alt="profile-icon"
+            className="rounded-full"
           />
         </div>
       </div>

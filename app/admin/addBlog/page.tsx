@@ -8,12 +8,14 @@ import { toast } from "react-toastify";
 const Page = () => {
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
+  const [generatedText, setGeneratedText] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [aiLoading, setAiLoading] = useState<boolean>(false);
   const [data, setData] = useState({
     title: "",
     description: "",
     category: "",
-    author: "Jason Dboss",
+    author: "Itachi",
     authorImg: "/author_img.png",
   });
 
@@ -23,6 +25,25 @@ const Page = () => {
       setPreview(preview);
     }
   }, [image]);
+
+  // Typewriter effect for generated text
+  useEffect(() => {
+    if (!generatedText) return;
+    let i = 0;
+    setData((prev) => ({
+      ...prev,
+      description: "",
+    }));
+    const interval = setInterval(() => {
+      setData((prev) => ({
+        ...prev,
+        description: prev.description + generatedText.charAt(i),
+      }));
+      i++;
+      if (i >= generatedText.length) clearInterval(interval);
+    }, 20); // speed (ms per character)
+    return () => clearInterval(interval);
+  }, [generatedText]);
 
   const displayImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -40,6 +61,14 @@ const Page = () => {
 
     if (!image) {
       toast.error("Please upload an image");
+      return;
+    }
+    if (!data.description) {
+      toast.error("Please write a blog post");
+      return;
+    }
+    if (!data.category) {
+      toast.error("Please select a category");
       return;
     }
     setLoading(true);
@@ -67,12 +96,33 @@ const Page = () => {
     }
   };
 
+  const generateBlog = async () => {
+    if (!data.title) {
+      toast.error("Please enter a title");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("content", data.title);
+    setAiLoading(true);
+    try {
+      const response = await axios.post("/api/generateBlog", formData);
+      console.log(response);
+
+      if (response.data.success) {
+        setGeneratedText(response.data.blogContent);
+      } else {
+        toast.error("Failed to generate blog post. Try again.");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setAiLoading(false);
+    }
+  };
   return (
     <div>
-      <form
-        onSubmit={handleSubmit}
-        className="pt-5 w-full  px-5 sm:pt-12 sm:px-15"
-      >
+      <div className="pt-5 w-full  px-5 sm:pt-12 sm:px-15">
         <p className="text-lg font-medium mb-4">Upload Thumbnail</p>
         <label htmlFor="image">
           <Image
@@ -101,20 +151,28 @@ const Page = () => {
           required
         />
         <p className="font-medium mt-3 text-lg">Blog Description</p>
-        <textarea
-          onChange={(e) =>
-            setData((prev) => ({
-              ...prev,
-              description: e.target.value,
-            }))
-          }
-          className="border px-2 py-2 w-full  outline-0 border-gray-500 mt-4 sm:w-[700px] rounded-md "
-          name="description"
-          value={data.description}
-          placeholder="Write Content Here"
-          rows={7}
-          required
-        />
+        <div className="relative w-full sm:w-[700px]">
+          <textarea
+            onChange={(e) =>
+              setData((prev) => ({
+                ...prev,
+                description: e.target.value,
+              }))
+            }
+            className="border px-2 py-2 w-full  outline-0 border-gray-500 mt-4  rounded-md "
+            name="description"
+            value={data.description}
+            placeholder="Write Content Here"
+            rows={7}
+          />
+          <button
+            onClick={generateBlog}
+            className="py-2 cursor-pointer absolute right-3 bottom-3 px-4 rounded-md bg-black text-white"
+          >
+            {aiLoading ? "Generating..." : "Generate Blog"}
+          </button>
+        </div>
+
         <p className="font-medium mt-3 text-lg">Blog Category</p>
 
         <select
@@ -127,7 +185,6 @@ const Page = () => {
           }
           value={data.category}
           className="w-60 my-4 rounded-md outline-0 px-4 py-2 border text-gray-500"
-          required
         >
           <option value="">Select Category</option>
 
@@ -140,11 +197,12 @@ const Page = () => {
         <br />
         <button
           type="submit"
+          onClick={handleSubmit}
           className="bg-black cursor-pointer mb-5 w-40 mt-3 rounded-md text-white px-2 py-3"
         >
           {loading ? "ADDING..." : "ADD"}
         </button>
-      </form>
+      </div>
     </div>
   );
 };
