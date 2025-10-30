@@ -25,7 +25,9 @@ const Page = ({ params }: PropTypes) => {
     authorImg: string;
   } | null>(null);
   const formattedDescription = data?.description?.replace(/\n/g, "<br/>") ?? "";
-  let responseArray = formattedDescription.split("**");
+
+  // Bold formatting
+  const responseArray = formattedDescription.split("**");
   let newResponse = "";
 
   for (let i = 0; i < responseArray.length; i++) {
@@ -35,7 +37,7 @@ const Page = ({ params }: PropTypes) => {
       newResponse += `<b>${responseArray[i]}</b>`;
     }
   }
-  let responseArray2 = newResponse.split("*");
+  const responseArray2 = newResponse.split("*");
   let newResponse2 = "";
 
   for (let i = 0; i < responseArray2.length; i++) {
