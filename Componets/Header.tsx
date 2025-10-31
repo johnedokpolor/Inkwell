@@ -76,7 +76,7 @@ const Header = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-2xl m-auto mt-10 text-xs sm:text-base"
+          className="max-w-2xl m-auto mt-10 text-base"
         >
           Stay updated with the latest insights and trends across Technology,
           Lifestyle, Education, Business and Politics through our most recent
