@@ -135,8 +135,12 @@ const Page = ({ params }: PropTypes) => {
               Share this article on social media
             </div>
             <div className="flex gap-2 mt-3">
-              <Image src={assets.facebook_icon} alt="" />
-              <Image src={assets.twitter_icon} alt="" />
+              <Link href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Finkwell-i.vercel.app%2Fblogs%2F6902bff7ec3665433751fd72&quote=Check%20out%20my%20blog%20post%20on%20InkWell">
+                <Image src={assets.facebook_icon} alt="" />
+              </Link>
+              <Link href="https://twitter.com/intent/tweet?text=Check%20out%20my%20blog%20post%20on%20InkWell%3A%20https%3A%2Finkwell-i.vercel.app%2Fblogs%2F6902bff7ec3665433751fd72">
+                <Image src={assets.twitter_icon} alt="" />
+              </Link>
               <Image src={assets.googleplus_icon} alt="" />
             </div>
             <Comments id={data._id} />
