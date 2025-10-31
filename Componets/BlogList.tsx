@@ -13,6 +13,7 @@ const BlogList = () => {
     category: string;
     author: string;
     author_img: string;
+    createdAt:string;
   }
   const [menu, setMenu] = useState("All");
   const [blogs, setBlogs] = useState<Blog[] | null>(null);
@@ -96,6 +97,7 @@ const BlogList = () => {
                     description={blog.description}
                     category={blog.category}
                     image={blog.image}
+                    createdAt={blog.createdAt}
                   />
                 </motion.div>
               );

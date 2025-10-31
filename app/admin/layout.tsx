@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
+import authorImg from "@/public/author_img.png";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [sideMenu, setSideMenu] = useState(false);
@@ -33,7 +34,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           <p className="font-medium">Admin Panel</p>
           <Image
-            src={`/author_img.png`}
+            src={authorImg}
             height={40}
             width={40}
             alt="profile-icon"

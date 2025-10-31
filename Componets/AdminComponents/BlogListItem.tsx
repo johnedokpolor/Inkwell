@@ -35,9 +35,13 @@ const BlogListItem = ({
       <td className="px-5 py-2">{title.slice(0, 20)}...</td>
       <td className="px-5 py-2">{blogDate}</td>
       <td onClick={() => deleteBlog(id)} className="px-5  py-2 ">
-        <button className="hover:bg-gray-400  rounded-full w-10 h-10 cursor-pointer  ">
-          x
-        </button>
+        {author === "Itachi" ? (
+          <p></p>
+        ) : (
+          <button className="hover:bg-gray-400  rounded-full w-10 h-10 cursor-pointer  ">
+            x
+          </button>
+        )}
       </td>
     </tr>
   );

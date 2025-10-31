@@ -15,8 +15,9 @@ const Page = () => {
     title: "",
     description: "",
     category: "",
-    author: "Itachi",
-    authorImg: "/author_img.png",
+    author: "Admin",
+    authorImg:
+      "https://res.cloudinary.com/dc8icbbn4/image/upload/v1761781453/blog_pics/jfdxvlhzqr8xofufbwlj.png",
   });
 
   useEffect(() => {
@@ -40,7 +41,10 @@ const Page = () => {
         description: prev.description + generatedText.charAt(i),
       }));
       i++;
-      if (i >= generatedText.length) clearInterval(interval);
+      if (i >= generatedText.length) {
+        clearInterval(interval);
+        setAiLoading(false);
+      }
     }, 20); // speed (ms per character)
     return () => clearInterval(interval);
   }, [generatedText]);
@@ -116,8 +120,6 @@ const Page = () => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
-      setAiLoading(false);
     }
   };
   return (
