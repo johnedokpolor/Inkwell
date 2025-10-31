@@ -40,7 +40,7 @@ const Blogitem = ({
 
         <div className="p-5">
           <h5 className="mb-2 text-lg font-medium tracking-tight text-gray-900">
-            {title.length > 50 ? `${title.slice(0, 20)}...` : title}
+            {title.length > 20 ? `${title.slice(0, 20)}...` : title}
           </h5>
           <p className="mb-3 text-sm tracking-tight text-gray-700">
             {description.slice(0, 100)}...

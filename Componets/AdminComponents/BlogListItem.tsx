@@ -36,13 +36,13 @@ const BlogListItem = ({
       <td className="px-5 py-2">{blogDate}</td>
       <td className="px-5 py-2 ">
         {author === "Itachi" ? (
-          <p>⭐</p>
+          <p>🚫</p>
         ) : (
           <button
             onClick={() => deleteBlog(id)}
             className="hover:bg-gray-400  rounded-full w-10 h-10 cursor-pointer  "
           >
-            x
+            ❌
           </button>
         )}
       </td>

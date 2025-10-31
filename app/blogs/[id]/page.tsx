@@ -104,7 +104,7 @@ const Page = ({ params }: PropTypes) => {
               initial={{ opacity: 0, y: -50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-3xl font-semibold sm:text-5xl max-w-[700px] mx-auto"
+              className="text-3xl font-semibold sm:text-5xl max-w-[700px] mx-auto px-5"
             >
               {data.title}
             </motion.h1>
